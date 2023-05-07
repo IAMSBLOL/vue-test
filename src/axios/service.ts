@@ -5,7 +5,7 @@ import axios, {
   type AxiosResponse,
   AxiosError
 } from 'axios'
-
+import { message } from 'ant-design-vue'
 import qs from 'qs'
 
 import { config } from './config'
@@ -65,12 +65,12 @@ service.interceptors.response.use(
     } else if (response.data.code === result_code) {
       return response.data
     } else {
-      // ElMessage.error(response.data.message)
+      message.error(response.data.message)
     }
   },
   (error: AxiosError) => {
     console.log('err' + error) // for debug
-    // ElMessage.error(error.message)
+    message.error(error.message)
     return Promise.reject(error)
   }
 )

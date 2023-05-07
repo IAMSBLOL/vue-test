@@ -6,7 +6,22 @@
     "composite": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@views/*": [
+        "src/views/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@router/*": [
+        "src/router/*"
+      ],
+      "@router": [
+        "src/router"
+      ],
+      "@api": [
+        "src/axios"
+      ],
     }
   }
 }

@@ -8,9 +8,10 @@ module.exports = {
     // require('postcss-flexbugs-fixes'),
     require('tailwindcss'),
     require('postcss-preset-env')({
-      autoprefixer: {
-      }
-      // stage: 3,
+      autoprefixer: { 
+        
+      },
+      stage: 3,
     })
   ],
   hideNothingWarning: true

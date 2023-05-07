@@ -1,11 +1,18 @@
-import './HomePage.less'
+
 import { Button } from 'ant-design-vue'
 import { onMounted, reactive, defineComponent } from 'vue'
-import GlMenu from './GlMenu'
-import { useTest } from '../../hooks'
+import type { PropType } from 'vue'
+import api from '@api'
+import './GlMenu.less'
 
-const HomePage = defineComponent({
-  name: 'HomePage',
+type Test = '123' | '456'
+const GlMenu = defineComponent({
+  props: {
+    test: {
+      type: String as PropType<Test>
+    }
+  },
+  name: 'GlMenu',
   setup (props, ctx) {
     const obj = reactive({ count: 0 })
     onMounted(
@@ -13,9 +20,8 @@ const HomePage = defineComponent({
         console.log('vue文档是真的FW')
       }
     )
-    useTest()
     const handleTest = () => {
-      console.log(111)
+      console.log(api)
       obj.count++
     }
 
@@ -33,9 +39,6 @@ const HomePage = defineComponent({
             <div class='test1 p-0'>
               {obj.count}
             </div>
-            <div>
-              <GlMenu test="123"/>
-            </div>
           </div>
         )
       )
@@ -44,4 +47,4 @@ const HomePage = defineComponent({
 
 })
 
-export default HomePage
+export default GlMenu

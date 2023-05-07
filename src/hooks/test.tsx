@@ -1,3 +1,6 @@
+import { onBeforeMount } from 'vue'
 export const useTest = () => {
-  return 1
+  onBeforeMount(() => {
+    console.log('test')
+  })
 }
