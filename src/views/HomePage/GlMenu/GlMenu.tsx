@@ -36,7 +36,7 @@ const GlMenu = defineComponent({
               onClick={handleTest}>
               1231
             </Button>
-            <div class='test1 p-0'>
+            <div class='test p-0'>
               {obj.count}
             </div>
           </div>

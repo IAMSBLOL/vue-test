@@ -1,54 +1,60 @@
 /// <reference types="vite/client" />
 /// <reference types="node" />
 /// <reference types="vite-plugin-svgr/client" />
-
+import 'vue'
 declare module '*.wasm'
 
 declare module '*.less' {
-    const styles: any
-    export = styles;
+  const styles: any
+  export = styles;
 }
 declare module '*.avif' {
-    const src: string
-    export default src
+  const src: string
+  export default src
 }
 
 declare module '*.bmp' {
-    const src: string
-    export default src
+  const src: string
+  export default src
 }
 
 declare module '*.gif' {
-    const src: string
-    export default src
+  const src: string
+  export default src
 }
 
 declare module '*.jpg' {
-    const src: string
-    export default src
+  const src: string
+  export default src
 }
 
 declare module '*.jpeg' {
-    const src: string
-    export default src
+  const src: string
+  export default src
 }
 
 declare module '*.png' {
-    const src: string
-    export default src
+  const src: string
+  export default src
 }
 
 declare module '*.webp' {
-    const src: string
-    export default src
+  const src: string
+  export default src
 }
 
 declare module '*.svg' {
 
-    export const ReactComponent: React.FunctionComponent<React.SVGProps<
-        SVGSVGElement
-    > & { title?: string }>
+  export const ReactComponent: React.FunctionComponent<React.SVGProps<
+    SVGSVGElement
+  > & { title?: string }>
 
-    const src: string
-    export default src
+  const src: string
+  export default src
+}
+
+declare module 'vue' {
+  interface HTMLAttributes {
+    styleName?: string
+  }
 }

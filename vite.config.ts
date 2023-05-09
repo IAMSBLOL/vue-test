@@ -5,11 +5,11 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
 import { optimizeCssModules } from 'vite-plugin-optimize-css-modules'
-// import loadCssModulePlugin from 'vite-plugin-load-css-module'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import babel from 'vite-plugin-babel'
-
-import path from 'path'
+import { extname } from 'path'
+// import vitePluginCssModules from '@zebing/vite-plugin-css-modules'
+// import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig((configEnv) => {
   const isDevelopment = configEnv.mode === 'development'
@@ -20,20 +20,33 @@ export default defineConfig((configEnv) => {
   return {
     plugins: [
       vue(),
-      vueJsx(),
+      vueJsx(
+        {
+          babelPlugins: [
+            [
+              '@zebing/babel-plugin-vue-css-modules',
+              {
+                styleName: 'styleName',
+                exclude: /node_modules/
+              }
+            ]
+          ]
+        }
+      ),
       basicSsl(),
       babel({
-        babelConfig: {
-          configFile: path.resolve(__dirname, 'babel.config.js')
+        filter: /\.tsx?$/,
+        loader: (path:any):any => {
+          if (extname(path) === '.jsx') {
+            return 'jsx'
+          }
         }
       }),
+      // vitePluginCssModules({ styleName: 'styleName', cssFile: ['less'] }),
       isProduction && legacy({
         targets: ['defaults', 'not IE 11']
       }),
 
-      // loadCssModulePlugin({
-      //   include: id => id.endsWith('less') && !id.includes('node_modules')
-      // }),
       isProduction && splitVendorChunkPlugin(),
       // 生产环境才开启压缩
       isProduction && optimizeCssModules()

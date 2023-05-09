@@ -1,8 +1,9 @@
-import './HomePage.less'
-import { Button } from 'ant-design-vue'
+
+import { Button, Popover } from 'ant-design-vue'
 import { onMounted, reactive, defineComponent } from 'vue'
-import GlMenu from './GlMenu'
+// import GlMenu from './GlMenu'
 import { useTest } from '../../hooks'
+import './HomePage.module.less'
 
 const HomePage = defineComponent({
   name: 'HomePage',
@@ -20,22 +21,28 @@ const HomePage = defineComponent({
     }
 
     console.log(props, ctx)
+    const title = () => {
+      return (
+        <div>title</div>
+      )
+    }
 
     return () => {
       return (
         (
-          <div class='container'>
-            <Button class='test'
-              type='primary'
-              onClick={handleTest}>
-              1231
-            </Button>
-            <div class='test1 p-0'>
+          <div styleName='HomePage' class='container'>
+            <Popover title={title()}>
+              <Button
+                type='primary'
+                onClick={handleTest}>
+                1231
+              </Button>
+            </Popover>
+
+            <div class='test p-0'>
               {obj.count}
             </div>
-            <div>
-              <GlMenu test="123"/>
-            </div>
+
           </div>
         )
       )
