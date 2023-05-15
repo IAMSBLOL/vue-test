@@ -5,24 +5,14 @@
 const isPro = process.env.NODE_ENV === 'production'
 
 const presets = [
-  [
-    '@babel/preset-env',
-    {
-      useBuiltIns: 'entry',
-      corejs: 3,
-      exclude: [
-        'transform-typeof-symbol'
-      ]
-    }
-  ],
-  "@babel/preset-typescript"
-]
 
+]
+console.log(2020, isPro)
 const plugins = [
   isPro && ['babel-plugin-clean-code', {
     clearConsole: true,
     consoleLevel: ['log', 'error', 'info', 'warn'],
-    clearDebugger: true,
+    clearDebugger: true
   }]
 ].filter(Boolean)
-module.exports = { presets, plugins };
+module.exports = { presets, plugins }

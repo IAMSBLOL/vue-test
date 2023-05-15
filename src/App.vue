@@ -28,6 +28,9 @@ const test = () => {
         <RouterLink to="/about">
           About
         </RouterLink>
+        <RouterLink to="/MusicMask">
+          About
+        </RouterLink>
       </nav>
     </div>
   </header>

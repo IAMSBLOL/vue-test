@@ -2,11 +2,11 @@
 import { Button } from 'ant-design-vue'
 import { onMounted, reactive, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import api from '@api'
-import './GlMenu.module.less'
+import HomePage from '../HomePage'
+import './MusicMask.module.less'
 
 type Test = '123' | '456'
-const GlMenu = defineComponent({
+const MusicMask = defineComponent({
   props: {
     test: {
       type: String as PropType<Test>
@@ -21,7 +21,6 @@ const GlMenu = defineComponent({
       }
     )
     const handleTest = () => {
-      console.log(api)
       obj.count++
     }
 
@@ -30,7 +29,7 @@ const GlMenu = defineComponent({
     return () => {
       return (
         (
-          <div styleName='GlMenu'>
+          <div styleName='MusicMask'>
             <Button class='test'
               type='primary'
               onClick={handleTest}>
@@ -39,6 +38,7 @@ const GlMenu = defineComponent({
             <div class='test p-0'>
               {obj.count}
             </div>
+            <HomePage />
           </div>
         )
       )
@@ -47,4 +47,4 @@ const GlMenu = defineComponent({
 
 })
 
-export default GlMenu
+export default MusicMask

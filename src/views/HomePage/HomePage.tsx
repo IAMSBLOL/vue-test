@@ -1,7 +1,7 @@
 
 import { Button, Popover } from 'ant-design-vue'
 import { onMounted, reactive, defineComponent } from 'vue'
-// import GlMenu from './GlMenu'
+import GlMenu from './GlMenu'
 import { useTest } from '../../hooks'
 import './HomePage.module.less'
 
@@ -42,7 +42,7 @@ const HomePage = defineComponent({
             <div class='test p-0'>
               {obj.count}
             </div>
-
+            <GlMenu />
           </div>
         )
       )

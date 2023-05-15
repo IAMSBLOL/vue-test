@@ -6,8 +6,8 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
 import { optimizeCssModules } from 'vite-plugin-optimize-css-modules'
 import basicSsl from '@vitejs/plugin-basic-ssl'
-import babel from 'vite-plugin-babel'
-import { extname } from 'path'
+// import babel from 'vite-plugin-babel'
+// import { extname } from 'path'
 // import vitePluginCssModules from '@zebing/vite-plugin-css-modules'
 // import path from 'path'
 // https://vitejs.dev/config/
@@ -15,7 +15,7 @@ export default defineConfig((configEnv) => {
   const isDevelopment = configEnv.mode === 'development'
   const isProduction = configEnv.mode === 'production'
   const generateScopedName = isDevelopment
-    ? '[name]__[hash:base64:5]'
+    ? '[local]__[hash:base64:5]'
     : '[hash:base64:5]'
   return {
     plugins: [
@@ -24,7 +24,7 @@ export default defineConfig((configEnv) => {
         {
           babelPlugins: [
             [
-              '@zebing/babel-plugin-vue-css-modules',
+              'babel-plugin-vue-tsx-css-modules',
               {
                 styleName: 'styleName',
                 exclude: /node_modules/
@@ -34,21 +34,14 @@ export default defineConfig((configEnv) => {
         }
       ),
       basicSsl(),
-      babel({
-        filter: /\.tsx?$/,
-        loader: (path:any):any => {
-          if (extname(path) === '.jsx') {
-            return 'jsx'
-          }
-        }
-      }),
+      // babel(),
       // vitePluginCssModules({ styleName: 'styleName', cssFile: ['less'] }),
       isProduction && legacy({
         targets: ['defaults', 'not IE 11']
       }),
 
       isProduction && splitVendorChunkPlugin(),
-      // 生产环境才开启压缩
+      // 生产环境才开启压缩,会把类名变成一个字母，有点恶心
       isProduction && optimizeCssModules()
 
     ].filter(Boolean),
@@ -66,10 +59,6 @@ export default defineConfig((configEnv) => {
       modules: {
         generateScopedName
       }
-    },
-    build: {
-      cssCodeSplit: false,
-      chunkSizeWarningLimit: 2048
     }
   }
 })
