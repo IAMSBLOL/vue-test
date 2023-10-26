@@ -1,6 +1,6 @@
 
 import { Button, Popover } from 'ant-design-vue'
-import { onMounted, reactive, defineComponent } from 'vue'
+import { onMounted, ref, defineComponent, watch } from 'vue'
 import GlMenu from './GlMenu'
 import { useTest } from '../../hooks'
 import './HomePage.module.less'
@@ -8,7 +8,8 @@ import './HomePage.module.less'
 const HomePage = defineComponent({
   name: 'HomePage',
   setup (props, ctx) {
-    const obj = reactive({ count: 0 })
+    const obj = ref(0)
+
     onMounted(
       () => {
         console.log('vue文档是真的FW')
@@ -17,7 +18,7 @@ const HomePage = defineComponent({
     useTest()
     const handleTest = () => {
       console.log(111)
-      obj.count++
+      obj.value++
     }
 
     console.log(props, ctx)
@@ -27,6 +28,21 @@ const HomePage = defineComponent({
       )
     }
 
+    watch(obj, (newValue) => {
+      console.log(newValue, 'sync newValue')
+      return 'sync newValue'
+    }, { flush: 'sync' })
+
+    watch(obj, (newValue) => {
+      console.log(newValue, 'pre newValue')
+      return 'pre newValue'
+    }, { flush: 'pre' })
+
+    watch(obj, (newValue) => {
+      console.log(newValue, 'post newValue')
+      return 'post newValue'
+    }, { flush: 'post' })
+
     return () => {
       return (
         (
@@ -35,12 +51,12 @@ const HomePage = defineComponent({
               <Button
                 type='primary'
                 onClick={handleTest}>
-                1231
+                12311
               </Button>
             </Popover>
 
             <div class='test p-0'>
-              {obj.count}
+              {obj.value}
             </div>
             <GlMenu />
           </div>
